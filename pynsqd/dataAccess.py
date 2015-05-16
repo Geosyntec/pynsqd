@@ -21,7 +21,7 @@ class NSQData(object):
     def __init__(self, datapath=None):
         # read my heavily modified version of the database
         if datapath is None:
-            datapath = os.path.join(sys.prefix, 'nsqd_data', 'nsqd_min.csv')
+            datapath = os.path.join(sys.prefix, 'pynsqd_data', 'nsqd_min.csv')
 
         self.datapath = datapath
         self._cols = [
@@ -53,6 +53,7 @@ class NSQData(object):
             self._data = (
                 df.assign(primary_landuse=df['primary_landuse'].replace(to_replace=landuses))
                   .assign(secondary_landuse=df['secondary_landuse'].replace(to_replace=landuses))
+                  .assign(station='outflow')
             )
         return self._data
 
@@ -134,3 +135,6 @@ class NSQData(object):
             return loc
         else:
             return data
+
+    def to_DataCollection(self, *args, **kwargs):
+        return wqio.DataCollection(self.data, *args, **kwargs)
