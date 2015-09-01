@@ -21,7 +21,7 @@ class NSQData(object):
     def __init__(self, datapath=None):
         # read my heavily modified version of the database
         if datapath is None:
-            datapath = os.path.join(sys.prefix, 'nsqd_data', 'nsqd_min.csv')
+            datapath = os.path.join(sys.prefix, 'pynsqd_data', 'nsqd_min.csv')
 
         self.datapath = datapath
         self._cols = [
