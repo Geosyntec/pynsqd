@@ -48,8 +48,8 @@ src/bmp/data/project/*
 
 # tex files #
 #############
-src/bmp/tex/*.pdf
-src/cvc/output/tex/*
+tex/*.pdf
+output/tex/*
 *.aux
 *.out
 *.toc
@@ -58,11 +58,12 @@ src/cvc/output/tex/*
 
 # test output #
 ###############
-src/*/tests/*.pdf
-src/*/tests/*.png
-src/*/tests/*.csv
-src/*/tests/*.tex
-src/*/tests/*.xlsx
+*/tests/*.pdf
+*/tests/*.png
+*/tests/*.csv
+*/tests/*.tex
+*/tests/*.xlsx
+pynsqd.egg-info/*
 
 # scratch files #
 #################
