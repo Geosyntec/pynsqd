@@ -41,7 +41,7 @@ INSTALL_REQUIRES = ['wqio']
 PACKAGE_DATA = {}
 DATA_FILES = [
     ('pynsqd_data', getDataFiles('data')),
-    ('pynsqd_data/test_data', getDataFiles('pynsqd/tests/testdata')),
+    #('pynsqd_data/test_data', getDataFiles('pynsqd/tests/testdata')),
 ]
 
 if __name__ == "__main__":
