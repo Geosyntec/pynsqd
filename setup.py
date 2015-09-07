@@ -38,27 +38,24 @@ CLASSIFIERS = [
     'Programming Language :: Python :: 3.4',
 ]
 INSTALL_REQUIRES = ['wqio']
-PACKAGE_DATA = {}
-DATA_FILES = [
-    ('pynsqd_data', getDataFiles('data')),
-    #('pynsqd_data/test_data', getDataFiles('pynsqd/tests/testdata')),
-]
+PACKAGE_DATA = {
+    'pynsqd.data': ['*.csv'],
+}
 
-if __name__ == "__main__":
-    setup(
-        name=NAME,
-        version=VERSION,
-        author=AUTHOR,
-        author_email=AUTHOR_EMAIL,
-        url=URL,
-        description=DESCRIPTION,
-        long_description=LONG_DESCRIPTION,
-        download_url=DOWNLOAD_URL,
-        license=LICENSE,
-        packages=PACKAGES,
-        package_data=PACKAGE_DATA,
-        data_files=DATA_FILES,
-        platforms=PLATFORMS,
-        classifiers=CLASSIFIERS,
-        install_requires=INSTALL_REQUIRES,
-    )
+setup(
+    name=NAME,
+    version=VERSION,
+    author=AUTHOR,
+    author_email=AUTHOR_EMAIL,
+    url=URL,
+    description=DESCRIPTION,
+    long_description=LONG_DESCRIPTION,
+    download_url=DOWNLOAD_URL,
+    license=LICENSE,
+    packages=PACKAGES,
+    package_data=PACKAGE_DATA,
+    platforms=PLATFORMS,
+    classifiers=CLASSIFIERS,
+    install_requires=INSTALL_REQUIRES,
+    zip_safe=False,
+)

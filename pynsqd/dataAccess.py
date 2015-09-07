@@ -1,6 +1,7 @@
 import os
 import sys
 import warnings
+from pkg_resources import resource_filename
 
 import numpy as np
 import pandas
@@ -21,7 +22,7 @@ class NSQData(object):
     def __init__(self, datapath=None):
         # read my heavily modified version of the database
         if datapath is None:
-            datapath = os.path.join(sys.prefix, 'pynsqd_data', 'nsqd_min.csv')
+            datapath = resource_filename('pynsqd.data', 'nsqd_min.csv')
 
         self.datapath = datapath
         self._cols = [

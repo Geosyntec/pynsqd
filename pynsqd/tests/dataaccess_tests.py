@@ -21,10 +21,10 @@ class test_NSQData:
             'secondary_landuse', 'percent_impervious', 'start_date',
             'days since last rain', 'precipitation_depth_(in)', 'season',
             'parameter', 'fraction', 'units', 'res', 'qual',
-            'drainage_area_acres', 'latitude', 'longitude',
+            'drainage_area_acres', 'latitude', 'longitude', 'station'
         ]
 
-        self.known_commerical_copper_shape = (1153, 21)
+        self.known_commerical_copper_shape = (1153, 22)
 
     def test_data(self):
         nt.assert_true(hasattr(self.data, 'data'))
