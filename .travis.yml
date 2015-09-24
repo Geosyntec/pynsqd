@@ -32,7 +32,7 @@ install:
   - pip install . --no-deps
 
 script:
-  - nosetests --with-coverage --cover-package=pynsqsd --verbose
+  - nosetests --with-coverage --cover-package=pynsqd --verbose
 
 after_success:
   - if [ ${COVERAGE} = true ]; then coveralls; fi
