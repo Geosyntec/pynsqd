@@ -31,6 +31,11 @@ class test_NSQData:
         nt.assert_is_instance(self.data.data, pandas.DataFrame)
         nt.assert_list_equal(self.data.data.columns.tolist(), self.known_columns)
 
+    def test_data_season(self):
+        known_seasons = ['autumn', 'spring', 'summer', 'winter']
+        seasons = sorted(self.data.data['season'].unique().tolist())
+        nt.assert_list_equal(seasons, known_seasons)
+
     def test_landuses(self):
         nt.assert_true(hasattr(self.data, 'landuses'))
         nt.assert_is_instance(self.data.landuses, list)
