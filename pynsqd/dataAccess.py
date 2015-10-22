@@ -6,7 +6,7 @@ from pkg_resources import resource_filename
 import numpy as np
 import pandas
 
-from wqio import Location
+import wqio
 
 __all__ = ['NSQData']
 
@@ -54,6 +54,8 @@ class NSQData(object):
             self._data = (
                 df.assign(primary_landuse=df['primary_landuse'].replace(to_replace=landuses))
                   .assign(secondary_landuse=df['secondary_landuse'].replace(to_replace=landuses))
+                  .assign(start_date=df['start_date'].apply(wqio.utils.santizeTimestamp))
+                  .assign(season=df['start_date'].apply(wqio.utils.getSeason))
                   .assign(station='outflow')
             )
         return self._data
@@ -131,7 +133,7 @@ class NSQData(object):
             data = data[data[key].isin(val)]
 
         if as_location:
-            loc = Location(data, rescol='res', qualcol='qual')
+            loc = wqio.Location(data, rescol='res', qualcol='qual')
             loc.definition = definition
             return loc
         else:
