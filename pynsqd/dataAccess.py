@@ -8,17 +8,21 @@ import pandas
 
 import wqio
 
+
 __all__ = ['NSQData']
-
-# keys are CVC POCs
-# values are the relevant
-#   column names in NSQD
-
 
 
 class NSQData(object):
-    '''Class representing the National Stormwater Quality Dataset.
-    '''
+    """ Class representing the National Stormwater Quality Dataset.
+
+    Parameters
+    ----------
+    datapath : string, optional.
+        Optional path the file to read. If not provided, the bundeled
+        data will be used.
+
+    """
+
     def __init__(self, datapath=None):
         # read my heavily modified version of the database
         if datapath is None:
@@ -81,7 +85,7 @@ class NSQData(object):
         return self.data[column].unique().tolist()
 
     def getData(self, check_vals=False, as_location=False, **kwargs):
-        '''Returns a pandas.DataFrame copy of a filtered dataset
+        """ Returns a pandas.DataFrame copy of a filtered dataset
 
         Parameters
         ----------
@@ -110,10 +114,11 @@ class NSQData(object):
 
         See Also
         --------
-        self.getColumnValues to confirm that a column exists and return
+        NSQData.getColumnValues to confirm that a column exists and return
             the distinct values inside that column.
 
-        '''
+        """
+
         # filter the data by landuse and parameteter
         definition = {}
         data = self.data.copy()
