@@ -1,3 +1,5 @@
+from pkg_resources import resource_filename
+
 import nose.tools as nt
 import numpy as np
 import numpy.testing as nptest
@@ -5,11 +7,14 @@ import pandas
 
 from wqio import Location
 
+import pynsqd
 import pynsqd.dataAccess as da
 
 class test_NSQData:
     def setup(self):
-        self.data = da.NSQData()
+        self.testfile = resource_filename('pynsqd.data', 'testdata.csv')
+
+        self.data = da.NSQData(datapath=self.testfile)
         self.known_landuses = np.array([
             'Commercial', 'Freeway', 'Industrial', 'Institutional',
             'Open Space', 'Residential', 'Unknown'
@@ -24,7 +29,7 @@ class test_NSQData:
             'drainage_area_acres', 'latitude', 'longitude', 'station'
         ]
 
-        self.known_commerical_copper_shape = (1153, 22)
+        self.known_commerical_copper_shape = (329, 22)
 
     def test_data(self):
         nt.assert_true(hasattr(self.data, 'data'))
