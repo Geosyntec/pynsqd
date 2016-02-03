@@ -1,0 +1,45 @@
+package:
+  name: pynsqd
+  version: !!str 0.1.1
+
+source:
+  git_url: https://github.com/Geosyntec/pynsqd.git
+  git_tag: v0.1.1
+#  patches:
+   # List any patch files here
+   # - fix.patch
+
+build:
+  number: 1
+
+requirements:
+  build:
+    - python
+    - setuptools
+    - wqio
+
+  run:
+    - python
+    - numpy
+    - pandas
+    - six
+    - wqio
+
+test:
+  imports:
+    - pynsqd
+
+  commands:
+    - python -c "import pynsqd; pynsqd.test()"
+
+  requires:
+    - nose
+
+about:
+  home: https://github.com/Geosyntec/pynsqd.git
+  license:  BSD License
+  summary: 'Connector for the National Stormwater Quality Dataset to wqio'
+
+# See
+# http://docs.continuum.io/conda/build.html for
+# more information about meta.yaml/configure
