@@ -36,6 +36,7 @@ dist
 ehthumbs.db
 Icon?
 Thumbs.db
+.vscode
 
 # VIM scratch files #
 #####################
@@ -67,6 +68,7 @@ output/tex/*
 */tests/*.tex
 */tests/*.xlsx
 pynsqd.egg-info/*
+.cache
 
 # scratch files #
 #################

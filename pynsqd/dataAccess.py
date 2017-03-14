@@ -25,8 +25,7 @@ class NSQData(object):
 
     def __init__(self, datapath=None):
         # read my heavily modified version of the database
-        if datapath is None:
-            datapath = resource_filename('pynsqd.data', 'nsqd_min.csv')
+        datapath = datapath or wqio.download('nsqd')
 
         self.datapath = datapath
         self._cols = [
@@ -58,7 +57,7 @@ class NSQData(object):
             self._data = (
                 df.assign(primary_landuse=df['primary_landuse'].replace(to_replace=landuses))
                   .assign(secondary_landuse=df['secondary_landuse'].replace(to_replace=landuses))
-                  .assign(start_date=df['start_date'].apply(wqio.utils.santizeTimestamp))
+                  .assign(start_date=df['start_date'].apply(wqio.validate.timestamp))
                   .assign(season=df['start_date'].apply(wqio.utils.getSeason))
                   .assign(station='outflow')
             )

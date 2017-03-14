@@ -2,34 +2,37 @@ language: python
 
 matrix:
   include:
-    - python: 2.7
+    - python: 3.4
       env:
         - COVERAGE=false
-    - python: 3.4
+    - python: 3.5
+      env:
+        - COVERAGE=false
+    - python: 3.6
       env:
         - COVERAGE=true
 
 before_install:
-  # Here we just install Miniconda, which you shouldn't have to change.
   - wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh
   - chmod +x miniconda.sh
-  - ./miniconda.sh -b
-  - export PATH=/home/travis/miniconda/bin:$PATH
+  - ./miniconda.sh -b -p $HOME/miniconda
+  - export PATH="$HOME/miniconda/bin:$PATH"
   - conda update --yes conda
-  - conda config --add channels phobson
-  #- cp wqio/data/matplotlibrc .
 
 install:
-  # We just set up a conda environment with the right Python version. This
-  # should not need changing.
-  - conda create --yes -n test python=$TRAVIS_PYTHON_VERSION wqio nose mock
+  - conda create --yes -n test python=$TRAVIS_PYTHON_VERSION pytest nose
   - source activate test
-  - conda install --yes coverage docopt requests pyyaml
+  - conda install --yes coverage docopt requests pyyaml mpl-probscale --channel=conda-forge
+  - conda install --yes wqio --channel=phobson/label/dev
   - pip install coveralls
   - pip install . --no-deps
 
 script:
-  - nosetests --with-coverage --cover-package=pynsqd --verbose
+  - python check_nsqd.py --verbose
 
 after_success:
-  - if [ ${COVERAGE} = true ]; then coveralls; fi
+  - if [ ${COVERAGE} = true ]; then
+      coverage run --source pynsqd check_nsqd.py;
+      coverage report -m;
+      coveralls;
+    fi
